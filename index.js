@@ -57,6 +57,16 @@ app.get('/:collection', function(req, res) { //A
          }
    		});
 });
+
+app.get('/returnAll/:collection', function(req, res) {
+	var params = req.params
+	collectionDriver.findAll(req.params.collection, function(error, objs) {
+		if(error) { res.send(400, error); }
+		else {
+			res.send(200, objs); 
+		}
+	});
+});
  
 // app.get('/:collection/:entity', function(req, res) { //I
 //    var params = req.params;
@@ -72,9 +82,10 @@ app.get('/:collection', function(req, res) { //A
 //    }
 // });
 
-app.get('/:collection/:entity', function(req, res) { //I
+app.get('/:collection/person/:entity', function(req, res) { //I
    var params = req.params;
    var entity = params.entity;
+   console.log("THIS IS THE ENTITY " + entity);
    var collection = params.collection;
    if (entity) {
        collectionDriver.findItem(collection, entity, function(error, objs) { //J
