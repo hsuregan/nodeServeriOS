@@ -58,12 +58,26 @@ app.get('/:collection', function(req, res) { //A
    		});
 });
  
+// app.get('/:collection/:entity', function(req, res) { //I
+//    var params = req.params;
+//    var entity = params.entity;
+//    var collection = params.collection;
+//    if (entity) {
+//        collectionDriver.get(collection, entity, function(error, objs) { //J
+//           if (error) { res.send(400, error); }
+//           else { res.send(200, objs); } //K
+//        });
+//    } else {
+//       res.send(400, {error: 'bad url', url: req.url});
+//    }
+// });
+
 app.get('/:collection/:entity', function(req, res) { //I
    var params = req.params;
    var entity = params.entity;
    var collection = params.collection;
    if (entity) {
-       collectionDriver.get(collection, entity, function(error, objs) { //J
+       collectionDriver.findItem(collection, entity, function(error, objs) { //J
           if (error) { res.send(400, error); }
           else { res.send(200, objs); } //K
        });
